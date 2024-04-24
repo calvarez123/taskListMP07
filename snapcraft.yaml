@@ -1,0 +1,30 @@
+name: tasklist-cam
+version: '0.1'
+summary: Aplicación de listas de tareas
+description: |
+  TaskList_CAM es una aplicación de listas de tareas muy completa que te ayudará en tu día a día.
+confinement: strict
+grade: devel
+base: core20
+
+apps:
+  tasklist-cam:
+    command: bin/desktop
+
+parts:
+  tasklist-cam:
+    plugin: dump
+    source: ../../build/linux/x64/release/bundle
+    organize:
+      descktop/desktop: bin/desktop
+
+  desktop-gtk3:
+    plugin: nil
+    stage-packages:
+      - libfontconfig1
+      - libgdk-pixbuf2.0-0
+      - libgtk-3-0
+      - libharfbuzz0b
+      - libpango-1.0-0
+      - libpangocairo-1.0-0
+    after: [tasklist-cam]
